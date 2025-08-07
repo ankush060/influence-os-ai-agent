@@ -1,0 +1,15 @@
+{
+  "name": "Ankush Raj",
+  "headline": "AI Enthusiast | Python Developer | BCA Graduate",
+  "about": "Passionate about building intelligent systems and exploring AI/ML. Strong background in Python, data analysis, and prompt engineering.",
+  "skills": ["Python", "AI", "Data Analysis", "Prompt Engineering", "APIs"],
+  "experience": [
+    {
+      "company": "TechNova",
+      "role": "AI Intern",
+      "duration": "Jan 2024 - May 2024",
+      "description": "Worked on AI-powered chatbot development using OpenAI APIs."
+    }
+  ],
+  "interests": ["Artificial Intelligence", "Machine Learning", "Startups", "Productivity"]
+}

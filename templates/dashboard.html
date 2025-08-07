@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Influence OS - AI Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-light: #f0f4f8;
+            --bg-dark: #1c1c1c;
+            --card-light: #ffffff;
+            --card-dark: #2c2c2c;
+            --text-light: #1a1a1a;
+            --text-dark: #f0f0f0;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-light);
+            margin: 0;
+            padding: 0;
+            transition: background 0.3s, color 0.3s;
+        }
+        body.dark {
+            background: var(--bg-dark);
+            color: var(--text-dark);
+        }
+        .container {
+            width: 90%;
+            margin: 40px auto;
+            background-color: var(--card-light);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s;
+        }
+        body.dark .container {
+            background-color: var(--card-dark);
+        }
+        .toggle-mode {
+            float: right;
+            margin-top: -50px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        h1 {
+            text-align: center;
+            color: #1a237e;
+            margin-bottom: 40px;
+        }
+        form, .analytics, .calendar {
+            margin-bottom: 40px;
+        }
+        textarea, input[type="datetime-local"] {
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #cfd8dc;
+            font-size: 16px;
+            resize: vertical;
+            width: 100%;
+        }
+        button {
+            padding: 12px 20px;
+            background-color: #1a237e;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #3949ab;
+        }
+        .info, .posts, .analytics, .calendar {
+            background-color: #f0f4c3;
+            padding: 20px;
+            border-left: 6px solid #cddc39;
+            border-radius: 10px;
+        }
+        .post-item {
+            background-color: #fff;
+            border: 1px solid #d1c4e9;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+        }
+        .dark .post-item {
+            background-color: #3a3a3a;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="toggle-mode">
+        <button onclick="toggleDarkMode()"><i class="fas fa-moon"></i> Toggle Dark Mode</button>
+    </div>
+    <h1><i class="fas fa-robot"></i> Influence OS - AI Assistant Dashboard</h1>
+
+    <div class="info">
+        <h3>📊 Profile Overview</h3>
+        <p><strong>Name:</strong> {{ profile.name }}</p>
+        <p><strong>Headline:</strong> {{ profile.headline }}</p>
+        <p><strong>Strengths:</strong> {{ profile.strengths }}</p>
+        <p><strong>Content Suggestions:</strong> {{ profile.content_suggestions }}</p>
+    </div>
+
+    <form action="/schedule" method="post">
+        <h3>📝 Schedule New Post</h3>
+        <textarea name="content" placeholder="Write your LinkedIn post..." required rows="4"></textarea>
+        <input type="datetime-local" name="post_time" required>
+        <button type="submit"><i class="fas fa-calendar-plus"></i> Schedule Post</button>
+    </form>
+
+    <form action="/generate" method="post">
+        <button type="submit"><i class="fas fa-magic"></i> Generate Post with AI</button>
+    </form>
+
+    <div class="posts">
+        <h3>📅 Scheduled Posts</h3>
+        {% for post in scheduled_posts %}
+        <div class="post-item">
+            <h3>⏰ {{ post.post_time }}</h3>
+            <p>{{ post.content }}</p>
+        </div>
+        {% else %}
+        <p>No scheduled posts yet.</p>
+        {% endfor %}
+    </div>
+
+    <div class="analytics">
+        <h3>📈 Simulated Analytics</h3>
+        <p>Total Posts: {{ analytics.total_posts }}</p>
+        <p>Estimated Reach: {{ analytics.estimated_reach }}</p>
+        <p>Avg. Engagement: {{ analytics.avg_engagement }}</p>
+    </div>
+
+    <div class="calendar">
+        <h3>🗓️ Visual Calendar (Placeholder)</h3>
+        <p>Coming soon: Drag-and-drop content calendar!</p>
+    </div>
+</div>
+
+<script>
+    function toggleDarkMode() {
+        document.body.classList.toggle("dark");
+    }
+</script>
+</body>
+</html>
